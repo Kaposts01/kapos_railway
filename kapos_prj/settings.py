@@ -124,4 +124,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'blog/static')
 ]
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['localhost','https://web-production-8cb41.up.railway.app/']
