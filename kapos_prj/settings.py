@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'suscripciones',
     'captacion',
     'pagos',
-    'auditoria',
+    #'auditoria',
 
 ]
 
