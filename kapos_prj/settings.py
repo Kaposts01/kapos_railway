@@ -134,3 +134,5 @@ ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
 ]
+
+CSRF_TRUSTED_ORIGINS = ['http://*','https://web-production-8cb41.up.railway.app']
