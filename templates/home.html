@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido a KAPOS{% endblock %}
+
+{% block content %}
+<div style="padding: 40px; text-align:center;">
+    <h1>Bienvenido a KAPOS</h1>
+    <p>Tu plataforma de gestión para socios, captación, pagos y suscripciones.</p>
+
+    {% if not user.is_authenticated %}
+        <a href="/login/" class="btn">Iniciar Sesión</a>
+    {% else %}
+        <a href="/dashboard/" class="btn">Ir al Dashboard</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<h1 style="padding: 20px;">Dashboard</h1>
+
+<p style="padding: 0 20px;">Hola {{ user.first_name }} ({{ user.rol }}).</p>
+
+<div style="padding: 20px;">
+    <h3>Panel de accesos rápidos</h3>
+
+    <ul>
+        {% for nombre, url in menu_items %}
+            <li><a href="{{ url }}">{{ nombre }}</a></li>
+        {% empty %}
+            <li>No tienes accesos asignados.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

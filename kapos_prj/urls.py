@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import (
 )
 
 urlpatterns = [
+    path('', include('interfaz.urls')),
     path('admin/', admin.site.urls),
 
     # JWT Auth
@@ -20,4 +21,7 @@ urlpatterns = [
     path('api/pagos/', include('pagos.urls')),
     path('api/captacion/', include('captacion.urls')),
     # path('api/auditoria/', include('auditoria.urls')),
+
+    
+
 ]

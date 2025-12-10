@@ -1,0 +1,12 @@
+<nav class="navbar">
+    <div class="navbar-brand">KAPOS</div>
+
+    <ul class="navbar-menu">
+        {% if user.is_authenticated %}
+            <li><a href="/dashboard/">Dashboard</a></li>
+            <li><a href="/logout/">Cerrar sesión</a></li>
+        {% else %}
+            <li><a href="/login/">Ingresar</a></li>
+        {% endif %}
+    </ul>
+</nav>

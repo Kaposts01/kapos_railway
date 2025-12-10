@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'suscripciones',
     'captacion',
     'pagos',
+    'interfaz',
     #'auditoria',
 
 ]
@@ -77,7 +78,7 @@ ROOT_URLCONF = 'kapos_prj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
