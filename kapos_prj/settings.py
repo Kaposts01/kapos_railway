@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     # DRF
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
+
     'corsheaders',
 
     # Apps KAPOS
