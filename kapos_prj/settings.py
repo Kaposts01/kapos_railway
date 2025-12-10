@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'suscripciones',
     'captacion',
     'pagos',
-    'auditoria',
+    #'auditoria',
 
 ]
 
@@ -129,7 +129,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -156,6 +156,6 @@ SIMPLE_JWT = {
 }
 
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
