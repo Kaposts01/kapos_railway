@@ -84,11 +84,14 @@ WSGI_APPLICATION = 'kapos_prj.wsgi.application'
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+if not DATABASE_URL or DATABASE_URL.strip() == "":
+    raise ValueError("❌ ERROR: La variable DATABASE_URL no está configurada en Railway")
+
 DATABASES = {
     "default": dj_database_url.parse(
         DATABASE_URL,
         conn_max_age=600,
-        ssl_require=False  # Railway exige SSL externamente, pero local puede fallar
+        ssl_require=True
     )
 }
 
