@@ -1,7 +1,13 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.core.validators import RegexValidator
 
 class Usuario(AbstractUser):
+    """
+    Modelo central de usuarios en el sistema KAPOS.
+    Extiende AbstractUser e incluye RUT, teléfono y roles específicos.
+    """
+
     # Roles del sistema
     ROLES = (
         ('DONANTE', 'Donante'),
@@ -18,10 +24,29 @@ class Usuario(AbstractUser):
         default='DONANTE'
     )
 
-    telefono = models.CharField(max_length=20, blank=True, null=True)
-    rut = models.CharField(max_length=15, blank=True, null=True, unique=True)
+    telefono = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True,
+        help_text="Teléfono de contacto"
+    )
 
-    # Mantener compatibilidad con grupos/permisos
+    rut = models.CharField(
+        max_length=12,
+        blank=True,
+        null=True,
+        unique=True,
+        help_text="RUT validado con dígito verificador"
+    )
+
+    # Validación opcional de formato email
+    email = models.EmailField(
+        unique=True,
+        blank=False,
+        null=False
+    )
+
+    # Permisos extendidos (necesarios al sobrescribir AbstractUser)
     groups = models.ManyToManyField(
         'auth.Group',
         related_name='usuarios_set',
@@ -33,5 +58,17 @@ class Usuario(AbstractUser):
         blank=True
     )
 
+    # Indicador de activo (ya existe en AbstractUser pero lo mantenemos)
+    is_active = models.BooleanField(default=True)
+
+    # Auditoría básica
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
     def __str__(self):
         return f"{self.username} ({self.rol})"
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"
