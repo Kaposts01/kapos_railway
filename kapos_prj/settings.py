@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Seguridad
 SECRET_KEY = os.getenv("SECRET_KEY", "dev_secret_key_change")
 
-DEBUG = os.getenv("DEBUG", "True") == "True"
+DEBUG = False
 
 ALLOWED_HOSTS = [
     "web-production-8cb41.up.railway.app",
@@ -21,10 +21,12 @@ ALLOWED_HOSTS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
+    "https://*.up.railway.app",
     "https://web-production-8cb41.up.railway.app",
     "http://localhost",
     "http://127.0.0.1",
 ]
+
 # Apps
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -52,7 +54,6 @@ INSTALLED_APPS = [
     'captacion',
     'pagos',
     'auditoria',
-    'core',
 
 ]
 
@@ -129,6 +130,11 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
@@ -147,3 +153,8 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKENS": True,
     "AUTH_HEADER_TYPES": ("Bearer",),
 }
+
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True

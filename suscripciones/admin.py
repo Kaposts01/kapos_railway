@@ -1,21 +1,21 @@
 from django.contrib import admin
-from .models import Suscripcion, EventoSuscripcion
+from .models import Suscripcion, HistorialEstadoSuscripcion, CambioPlanSuscripcion
 
-class EventoInline(admin.TabularInline):
-    model = EventoSuscripcion
-    extra = 0
-    readonly_fields = ('tipo', 'fecha')
 
 @admin.register(Suscripcion)
 class SuscripcionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'cliente', 'plan', 'estado', 'fecha_inicio', 'creado_por')
-    list_filter = ('estado', 'plan')
-    search_fields = ('cliente__nombre', 'cliente__rut')
-    autocomplete_fields = ('cliente', 'plan', 'creado_por')
-    inlines = [EventoInline]
+    list_display = ("id", "cliente", "plan", "estado", "fecha_inicio", "metodo_pago")
+    list_filter = ("estado", "metodo_pago")
+    search_fields = ("cliente__nombre", "cliente__apellido", "cliente__rut", "plan__nombre")
 
-@admin.register(EventoSuscripcion)
-class EventoSuscripcionAdmin(admin.ModelAdmin):
-    list_display = ('suscripcion', 'tipo', 'fecha')
-    list_filter = ('tipo',)
-    search_fields = ('suscripcion__cliente__nombre',)
+
+@admin.register(HistorialEstadoSuscripcion)
+class HistorialEstadoAdmin(admin.ModelAdmin):
+    list_display = ("suscripcion", "estado_anterior", "estado_nuevo", "fecha_cambio")
+    list_filter = ("estado_anterior", "estado_nuevo")
+
+
+@admin.register(CambioPlanSuscripcion)
+class CambioPlanAdmin(admin.ModelAdmin):
+    list_display = ("suscripcion", "plan_anterior", "plan_nuevo", "fecha_cambio")
+    list_filter = ("plan_anterior", "plan_nuevo")

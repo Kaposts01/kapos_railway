@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import Usuario
 
+
 @admin.register(Usuario)
 class UsuarioAdmin(UserAdmin):
     list_display = ('username', 'email', 'rut', 'rol', 'is_active')
@@ -18,5 +19,8 @@ class UsuarioAdmin(UserAdmin):
         }),
         ("Rol y permisos", {
             "fields": ("rol", "is_active", "is_staff", "is_superuser", "groups", "user_permissions")
+        }),
+        ("Fechas importantes", {
+            "fields": ("last_login", "date_joined")
         }),
     )

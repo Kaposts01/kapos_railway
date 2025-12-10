@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.core.validators import RegexValidator
+
 
 class Usuario(AbstractUser):
     """
@@ -39,7 +39,7 @@ class Usuario(AbstractUser):
         help_text="RUT validado con dígito verificador"
     )
 
-    # Validación opcional de formato email
+    # Email único (sobre-escribimos al de AbstractUser)
     email = models.EmailField(
         unique=True,
         blank=False,

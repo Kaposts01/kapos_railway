@@ -1,23 +1,22 @@
 from django.contrib import admin
-from .models import Banco, Mandato, AporteMensual
+from .models import Banco, Mandato, Pago
+
 
 @admin.register(Banco)
 class BancoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'codigo')
-    search_fields = ('nombre', 'codigo')
+    list_display = ('nombre', 'codigo_sbif', 'activo')
+    search_fields = ('nombre', 'codigo_sbif')
 
 
 @admin.register(Mandato)
 class MandatoAdmin(admin.ModelAdmin):
-    list_display = ('suscripcion', 'tipo', 'banco', 'cuenta')
-    list_filter = ('tipo', 'banco')
-    search_fields = ('suscripcion__cliente__nombre', 'cuenta')
-    autocomplete_fields = ('suscripcion', 'banco')
+    list_display = ('suscripcion', 'tipo', 'banco', 'numero_cuenta', 'vigente')
+    search_fields = ('numero_cuenta', 'codigo_mandato')
+    list_filter = ('tipo', 'vigente', 'banco')
 
 
-@admin.register(AporteMensual)
-class AporteMensualAdmin(admin.ModelAdmin):
-    list_display = ('suscripcion', 'fecha', 'monto', 'exito')
-    list_filter = ('exito',)
-    search_fields = ('suscripcion__cliente__nombre',)
-    autocomplete_fields = ('suscripcion',)
+@admin.register(Pago)
+class PagoAdmin(admin.ModelAdmin):
+    list_display = ('suscripcion', 'fecha_programada', 'monto', 'estado')
+    list_filter = ('estado', 'fecha_programada')
+    search_fields = ('codigo_transaccion',)
