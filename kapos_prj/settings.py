@@ -22,6 +22,7 @@ ALLOWED_HOSTS = [
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.up.railway.app",
+    "https://*.railway.app",
     "https://web-production-8cb41.up.railway.app",
     "http://localhost",
     "http://127.0.0.1",
