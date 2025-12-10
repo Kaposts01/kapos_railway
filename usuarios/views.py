@@ -1,7 +1,14 @@
-from django.urls import path
-from .views import UsuarioListCreateView, UsuarioDetailView
+from rest_framework import generics
+from .models import Usuario
+from .serializers import UsuarioSerializer
 
-urlpatterns = [
-    path('', UsuarioListCreateView.as_view(), name='usuarios-list'),
-    path('<int:pk>/', UsuarioDetailView.as_view(), name='usuarios-detail'),
-]
+# Lista y crea usuarios
+class UsuarioListCreateView(generics.ListCreateAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
+
+
+# Detalle, actualización y eliminación
+class UsuarioDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Usuario.objects.all()
+    serializer_class = UsuarioSerializer
