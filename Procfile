@@ -1,1 +1,1 @@
-web: python manage.py collectstatic && gunicorn kapos_prj.wsgi
+web: gunicorn kapos_prj.wsgi
