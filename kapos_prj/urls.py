@@ -19,5 +19,5 @@ urlpatterns = [
     path('api/clientes/', include('clientes.urls')),
     path('api/pagos/', include('pagos.urls')),
     path('api/captacion/', include('captacion.urls')),
-    path('api/auditoria/', include('auditoria.urls')),  # si usaremos endpoints de logs
+    # path('api/auditoria/', include('auditoria.urls')),
 ]
